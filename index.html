@@ -92,7 +92,7 @@
     #noBtn {
       background: linear-gradient(45deg, #444, #111);
       box-shadow: 0 0 15px #000;
-      position: relative;
+      position: absolute;
     }
 
     #message {
@@ -119,6 +119,7 @@
       text-align: center;
       margin-bottom: 15px;
       width: 250px;
+      cursor: default;
     }
 
     #sendBtn {
@@ -189,8 +190,10 @@
       message.style.opacity = 0;
     });
 
-    // Nút "Em không thích thầy" né chuột
-    noBtn.addEventListener("mouseover", () => {
+    // Nút "Em không thích thầy" né chuột liên tục
+    noBtn.addEventListener("mouseover", moveNoBtn);
+
+    function moveNoBtn() {
       clickSound.currentTime = 0;
       clickSound.play();
 
@@ -209,10 +212,9 @@
         Math.abs(y - yesRect.top) < safeDistance
       );
 
-      noBtn.style.position = "absolute";
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
-    });
+    }
 
     // Bấm Gửi 💌 → ẩn input, hiện "Thầy biết mà ahihi 💖"
     sendBtn.addEventListener("click", () => {
