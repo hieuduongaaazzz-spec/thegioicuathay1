@@ -179,7 +179,6 @@
     const noBtn = document.getElementById("noBtn");
     const message = document.getElementById("message");
     const loveBox = document.getElementById("loveInputBox");
-    const loveInput = document.getElementById("loveInput");
     const sendBtn = document.getElementById("sendBtn");
     const clickSound = document.getElementById("clickSound");
     const music = document.getElementById("bgMusic");
@@ -220,12 +219,18 @@
       noBtn.style.top = `${y}px`;
     });
 
-    // Khi người chơi nhập và gửi lời yêu thương
+    // Khi người chơi bấm gửi lời yêu thương
     sendBtn.addEventListener("click", () => {
-      loveInput.value = "Em thích thầy 💞";
+      // Bất kể họ nhập gì cũng sẽ hiển thị dòng cố định
       loveBox.style.display = "none";
+      message.textContent = "Em thích thầy 💞"; // cố định
       message.style.opacity = 1;
       spawnHearts(15);
+
+      // Sau 2 giây, hiện thêm thông báo “Thầy biết mà ahihi 💖”
+      setTimeout(() => {
+        message.textContent = "Thầy biết mà ahihi 💖";
+      }, 2000);
     });
 
     // Hiệu ứng tim bay
