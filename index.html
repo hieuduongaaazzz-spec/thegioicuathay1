@@ -190,7 +190,7 @@
       message.style.opacity = 0;
     });
 
-    // Nút "Em không thích thầy" né chuột liên tục
+    // Nút "Em không thích thầy" né chuột liên tục, không ra ngoài khung
     noBtn.addEventListener("mouseover", moveNoBtn);
 
     function moveNoBtn() {
@@ -201,12 +201,15 @@
       const btnHeight = noBtn.offsetHeight;
       const yesRect = yesBtn.getBoundingClientRect();
 
+      const maxX = window.innerWidth - btnWidth - 10;
+      const maxY = window.innerHeight - btnHeight - 10;
+      const safeDistance = 150;
+
       let x, y;
-      let safeDistance = 150;
 
       do {
-        x = Math.random() * (window.innerWidth - btnWidth - 20);
-        y = Math.random() * (window.innerHeight - btnHeight - 20);
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
       } while (
         Math.abs(x - yesRect.left) < safeDistance &&
         Math.abs(y - yesRect.top) < safeDistance
@@ -218,7 +221,7 @@
 
     // Bấm Gửi 💌 → ẩn input, hiện "Thầy biết mà ahihi 💖"
     sendBtn.addEventListener("click", () => {
-      loveBox.style.display = "none"; // ẩn ô input
+      loveBox.style.display = "none";
       message.textContent = "Thầy biết mà ahihi 💖";
       message.style.opacity = 1;
       spawnHearts(15);
