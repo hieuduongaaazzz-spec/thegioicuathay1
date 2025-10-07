@@ -28,7 +28,6 @@
       100% {background-position: 0% 50%;}
     }
 
-    /* Dòng chữ chạy */
     .marquee {
       position: fixed;
       top: 10px;
@@ -104,7 +103,6 @@
       transition: opacity 1s ease;
     }
 
-    /* Ô nhập lời yêu thương */
     #loveInputBox {
       display: none;
       flex-direction: column;
@@ -132,7 +130,6 @@
       transform: scale(1.1);
     }
 
-    /* Hiệu ứng tim bay */
     .heart {
       position: fixed;
       color: #ff66cc;
@@ -158,18 +155,16 @@
   </div>
 
   <div id="loveInputBox">
-    <input id="loveInput" type="text" placeholder="Nhập lời yêu thương...">
+    <input id="loveInput" type="text" value="Em thích thầy 💞" readonly>
     <button id="sendBtn">Gửi 💌</button>
   </div>
 
   <div id="message">Thầy biết mà ahihi 💖</div>
 
-  <!-- 🎵 Nhạc nền -->
   <audio id="bgMusic" autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2023/09/06/audio_6b4b9e6e45.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- 🔊 Âm thanh “tạch” -->
   <audio id="clickSound">
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8e7b5e39e4.mp3" type="audio/mpeg">
   </audio>
@@ -188,13 +183,13 @@
       music.play().catch(() => {});
     }, { once: true });
 
-    // Khi bấm "Gửi lời yêu thương tới thầy"
+    // Bấm "Gửi lời yêu thương tới thầy" → hiện ô input cố định
     yesBtn.addEventListener("click", () => {
       loveBox.style.display = "flex";
       message.style.opacity = 0;
     });
 
-    // Khi rê chuột vào "Em không thích thầy"
+    // Nút "Em không thích thầy" né chuột
     noBtn.addEventListener("mouseover", () => {
       clickSound.currentTime = 0;
       clickSound.play();
@@ -219,18 +214,12 @@
       noBtn.style.top = `${y}px`;
     });
 
-    // Khi người chơi bấm gửi lời yêu thương
+    // Bấm Gửi 💌 → ẩn input, hiện "Thầy biết mà ahihi 💖"
     sendBtn.addEventListener("click", () => {
-      // Bất kể họ nhập gì cũng sẽ hiển thị dòng cố định
-      loveBox.style.display = "none";
-      message.textContent = "Em thích thầy 💞"; // cố định
+      loveBox.style.display = "none"; // ẩn ô input
+      message.textContent = "Thầy biết mà ahihi 💖";
       message.style.opacity = 1;
       spawnHearts(15);
-
-      // Sau 2 giây, hiện thêm thông báo “Thầy biết mà ahihi 💖”
-      setTimeout(() => {
-        message.textContent = "Thầy biết mà ahihi 💖";
-      }, 2000);
     });
 
     // Hiệu ứng tim bay
